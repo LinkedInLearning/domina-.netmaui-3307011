@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WisdomPetMedicine.Views.VisitDetailsPage"
+             xmlns:vm="clr-namespace:WisdomPetMedicine.ViewModels"
+             Title="Venta">
+
+    <Grid RowDefinitions="*,Auto,*,Auto" Padding="4">
+        <Grid ColumnDefinitions="*,*">
+            <CollectionView ItemsSource="{Binding Products}"
+                            SelectedItem="{Binding SelectedProduct, Mode=TwoWay}"
+                            ItemTemplate="{StaticResource ProductDataTemplate}"
+                            SelectionMode="Single" />
+            
+            <Grid RowDefinitions="*,Auto"
+                  Grid.Column="1">
+                <VerticalStackLayout>
+                    <Label Text="Nombre" FontAttributes="Bold" />
+                    <Label Text="{Binding SelectedProduct.Name}" />
+                    <Label Text="Descripción" FontAttributes="Bold" />
+                    <Label Text="{Binding SelectedProduct.Description}" />
+                    <Label Text="Precio" FontAttributes="Bold" />
+                    <Label Text="{Binding SelectedProduct.Price, StringFormat='{0:C}'}" />
+                </VerticalStackLayout>
+
+                <HorizontalStackLayout Grid.Row="1">
+                    <Stepper Minimum="1"
+                         Maximum="100"
+                         Increment="1"
+                         x:Name="quantity"
+                         Value="{Binding Quantity, Mode=TwoWay}" />
+                    <Label 
+                        VerticalOptions="Center"
+                        Margin="4"
+                        Text="{Binding Value, Source={x:Reference Name=quantity}}" />
+                </HorizontalStackLayout>
+            </Grid>
+
+        </Grid>
+
+        <Button Grid.Row="1" 
+                Text="Agregar" 
+                Command="{Binding AddCommand}" />
+
+        <CollectionView Grid.Row="2"
+                        ItemsSource="{Binding Sales}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItems>
+                                <SwipeItem Text="Borrar"
+                                           BackgroundColor="LightPink"
+                                           Command="{Binding BindingContext.DeleteSaleCommand,
+                                    Source={x:RelativeSource AncestorType={x:Type ContentPage}}}"
+                                           CommandParameter="{Binding}"
+                                           />
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+
+                        <Grid ColumnDefinitions="*,3*,*,*" 
+                              HeightRequest="60" 
+                              Padding="4">
+
+                            <Label Text="{Binding Quantity}" 
+                                   VerticalTextAlignment="Center" />
+                            <Label Text="{Binding ProductName}"
+                                   Grid.Column="1"
+                                   VerticalTextAlignment="Center" />
+                            <Label Text="{Binding ProductPrice, StringFormat='{0:C}'}"
+                                   Grid.Column="2"
+                                   VerticalTextAlignment="Center" />
+                            <Label Text="{Binding Amount, StringFormat='{0:C}'}"
+                                   Grid.Column="3"
+                                   VerticalTextAlignment="Center" />
+                        </Grid>
+
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button Grid.Row="3"
+                Text="Finalizar"
+                Command="{Binding FinishSaleCommand}" />
+    </Grid>
+</ContentPage>
