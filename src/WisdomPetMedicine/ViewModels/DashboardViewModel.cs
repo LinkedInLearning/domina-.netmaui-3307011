@@ -13,7 +13,7 @@ public partial class DashboardViewModel : ViewModelBase
     int clients;
 
     [ObservableProperty]
-    decimal totalAmount;
+    double totalAmount;
 
     [ObservableProperty]
     int totalProducts;
@@ -27,13 +27,11 @@ public partial class DashboardViewModel : ViewModelBase
 
     public void LoadDashboard()
     {
-        Visits = outDbContext.Sales
-            .ToList()
-            .DistinctBy(s => s.ClientId)
-            .ToList()
-            .Count();
+        Visits = outDbContext.Sales.Select(s => s.ClientId)
+                                   .Distinct()
+                                   .Count();
         
-        TotalAmount = outDbContext.Sales.ToList().Sum(s => s.Quantity * s.Price);
+        TotalAmount = outDbContext.Sales.Sum(s => s.Quantity * (double)s.Price);
         TotalProducts = outDbContext.Sales.Sum(s => s.Quantity);
     }
 }
