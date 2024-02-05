@@ -1,22 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WisdomPetMedicine.Services;
 
 namespace WisdomPetMedicine.DataAccess;
-public class WpmOutDbContext : DbContext
+public class WpmOutDbContext(IDatabasePathService databasePathService) : DbContext
 {
-    private readonly IDatabasePathService databasePathService;
-
     public DbSet<SaleItem> Sales { get; set; }
-
-    public WpmOutDbContext(IDatabasePathService databasePathService)
-    {
-        this.databasePathService = databasePathService;
-    }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
