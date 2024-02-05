@@ -4,6 +4,8 @@ using WisdomPetMedicine.DataAccess;
 namespace WisdomPetMedicine.ViewModels;
 public partial class DashboardViewModel : ViewModelBase
 {
+    private readonly WpmOutDbContext outDbContext;
+
     [ObservableProperty]
     int visits;
 
@@ -16,15 +18,21 @@ public partial class DashboardViewModel : ViewModelBase
     [ObservableProperty]
     int totalProducts;
 
-    public DashboardViewModel(WpmOutDbContext outDbContext)
+    public DashboardViewModel(WpmOutDbContext wpmOutDbContext)
     {
+        this.outDbContext = wpmOutDbContext;
         var db = new WpmDbContext();
+        Clients = db.Clients.Count();
+    }
+
+    public void LoadDashboard()
+    {
         Visits = outDbContext.Sales
             .ToList()
             .DistinctBy(s => s.ClientId)
             .ToList()
             .Count();
-        Clients = db.Clients.Count();
+        
         TotalAmount = outDbContext.Sales.ToList().Sum(s => s.Quantity * s.Price);
         TotalProducts = outDbContext.Sales.Sum(s => s.Quantity);
     }

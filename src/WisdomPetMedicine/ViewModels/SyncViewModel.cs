@@ -11,12 +11,12 @@ public partial class SyncViewModel : ViewModelBase
     private string accessToken;
 
     [ObservableProperty]
-    bool isAuthenticated;
+    bool isAuthenticated = true;
 
     [ObservableProperty]
     string message;
 
-    private readonly AuthService authService;
+    //private readonly AuthService authService;
     private readonly SyncService syncService;
     private readonly WpmOutDbContext outDbContext;
 
@@ -24,7 +24,7 @@ public partial class SyncViewModel : ViewModelBase
                          SyncService syncService,
                          WpmOutDbContext outDbContext)
     {
-        this.authService = authService;
+        //this.authService = authService;
         this.syncService = syncService;
         this.outDbContext = outDbContext;
     }
@@ -51,25 +51,26 @@ public partial class SyncViewModel : ViewModelBase
     [RelayCommand]
     private async Task Login()
     {
-        try
-        {
-            var result = await authService
-                                .AcquireTokenSilentAsync()
-                                .ConfigureAwait(false);
-            IsAuthenticated = true;
-            accessToken = result.AccessToken;
-        }
-        catch (MsalUiRequiredException)
-        {
-            var result = await authService
-                                .AcquireTokenInteractiveAsync()
-                                .ConfigureAwait(false);
-            IsAuthenticated = true;
-            accessToken = result.AccessToken;
-        }
-        catch
-        {
-            IsAuthenticated = false;
-        }
+        await Task.Delay(0);
+        //try
+        //{
+        //    var result = await authService
+        //                        .AcquireTokenSilentAsync()
+        //                        .ConfigureAwait(false);
+        //    IsAuthenticated = true;
+        //    accessToken = result.AccessToken;
+        //}
+        //catch (MsalUiRequiredException)
+        //{
+        //    var result = await authService
+        //                        .AcquireTokenInteractiveAsync()
+        //                        .ConfigureAwait(false);
+        //    IsAuthenticated = true;
+        //    accessToken = result.AccessToken;
+        //}
+        //catch
+        //{
+        //    IsAuthenticated = false;
+        //}
     }
 }

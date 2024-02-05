@@ -82,8 +82,6 @@ public partial class VisitDetailsViewModel : ViewModelBase, IQueryAttributable
     [RelayCommand(CanExecute = nameof(CanFinishSale))]
     private async Task FinishSale()
     {
-        outDbContext.Database.EnsureCreated();
-
         foreach (var item in Sales)
         {
             outDbContext.Sales.Add(new SaleItem(

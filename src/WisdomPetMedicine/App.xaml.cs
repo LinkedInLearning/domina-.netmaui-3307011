@@ -1,11 +1,15 @@
-﻿namespace WisdomPetMedicine;
+﻿using WisdomPetMedicine.DataAccess;
+
+namespace WisdomPetMedicine;
 
 public partial class App : Application
 {
-	public App()
+	public App(WpmOutDbContext wpmOutDbContext)
 	{
 		InitializeComponent();
 
-		MainPage = new AppShell();
+        wpmOutDbContext.Database.EnsureCreated();
+
+        MainPage = new AppShell();
 	}
 }
