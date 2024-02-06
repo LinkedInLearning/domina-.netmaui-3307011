@@ -28,6 +28,8 @@ public static class MauiAppBuilderExtensions
         //builder.Services.AddSingleton<AuthService>();
         builder.Services.AddTransient<SyncPage>();
         builder.Services.AddTransient<SyncViewModel>();
+        builder.Services.AddTransient<SignaturePage>();
+        builder.Services.AddTransient<SignatureViewModel>();
 
         var dbContext = new WpmDbContext();
         dbContext.Database.EnsureCreated();
@@ -37,5 +39,7 @@ public static class MauiAppBuilderExtensions
             typeof(ProductDetailsPage));
         Routing.RegisterRoute(nameof(VisitDetailsPage),
             typeof(VisitDetailsPage));
+        Routing.RegisterRoute(nameof(SignaturePage),
+            typeof(SignaturePage));
     }
 }

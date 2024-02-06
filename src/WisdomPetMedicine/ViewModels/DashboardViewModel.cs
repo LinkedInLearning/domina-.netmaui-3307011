@@ -27,11 +27,11 @@ public partial class DashboardViewModel : ViewModelBase
 
     public void LoadDashboard()
     {
-        Visits = outDbContext.Sales.Select(s => s.ClientId)
+        Visits = outDbContext.Orders.Select(s => s.ClientId)
                                    .Distinct()
                                    .Count();
-        
-        TotalAmount = outDbContext.Sales.Sum(s => s.Quantity * (double)s.Price);
-        TotalProducts = outDbContext.Sales.Sum(s => s.Quantity);
+
+        TotalAmount = outDbContext.Orders.Sum(s => (double)s.Total);
+        TotalProducts = outDbContext.Orders.Sum(s => s.Items.Count);
     }
 }

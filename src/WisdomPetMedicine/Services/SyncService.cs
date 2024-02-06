@@ -1,4 +1,5 @@
 ﻿using System.Net.Http.Json;
+using WisdomPetMedicine.DataAccess;
 using WisdomPetMedicine.Models;
 
 namespace WisdomPetMedicine.Services;
@@ -9,7 +10,7 @@ public class SyncService
     {
         //client = new HttpClient();
     }
-    public async Task<bool> SendDataAsync(IEnumerable<Sale> sales, string accessToken)
+    public async Task<bool> SendDataAsync(IEnumerable<Order> sales, string accessToken)
     {
         //var uri = "https://wpmapi.azurewebsites.net/sales";
         //var body = new

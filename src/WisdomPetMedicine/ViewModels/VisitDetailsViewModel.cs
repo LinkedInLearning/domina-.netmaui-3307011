@@ -1,6 +1,4 @@
-﻿namespace WisdomPetMedicine.ViewModels;
-
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,7 +6,9 @@ using System.Windows.Input;
 using WisdomPetMedicine.DataAccess;
 using WisdomPetMedicine.Models;
 using WisdomPetMedicine.Services;
+using WisdomPetMedicine.Views;
 
+namespace WisdomPetMedicine.ViewModels;
 public partial class VisitDetailsViewModel : ViewModelBase, IQueryAttributable
 {
     public int ClientId { get; set; }
@@ -28,12 +28,14 @@ public partial class VisitDetailsViewModel : ViewModelBase, IQueryAttributable
     private readonly IConnectivity connectivity;
     private readonly SyncService syncService;
     private readonly WpmOutDbContext outDbContext;
+    private readonly INavigationService navigationService;
 
     public ICommand AddCommand { get; set; }
 
     public VisitDetailsViewModel(IConnectivity connectivity,
-        SyncService syncService,
-        WpmOutDbContext outDbContext)
+                                 SyncService syncService,
+                                 WpmOutDbContext outDbContext,
+                                 INavigationService navigationService)
     {
         var db = new WpmDbContext();
         Products = new ObservableCollection<Product>(db.Products);
@@ -52,7 +54,7 @@ public partial class VisitDetailsViewModel : ViewModelBase, IQueryAttributable
         this.connectivity = connectivity;
         this.syncService = syncService;
         this.outDbContext = outDbContext;
-
+        this.navigationService = navigationService;
         connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
     }
 
@@ -82,18 +84,25 @@ public partial class VisitDetailsViewModel : ViewModelBase, IQueryAttributable
     [RelayCommand(CanExecute = nameof(CanFinishSale))]
     private async Task FinishSale()
     {
+        var newOrder = new Order()
+        {
+            ClientId = ClientId,
+            Total = Sales.Sum(s => s.Quantity * s.ProductPrice)
+        };
+
         foreach (var item in Sales)
         {
-            outDbContext.Sales.Add(new SaleItem(
-                item.ClientId,
-                item.ProductId,
-                item.Quantity,
-                item.ProductPrice
-                ));
+            newOrder.Items.Add(new OrderItem()
+            {
+                Price = item.ProductPrice,
+                Quantity = item.Quantity
+            });
         }
 
-        await outDbContext.SaveChangesAsync();
+        outDbContext.Orders.Add(newOrder);
 
-        await Shell.Current.DisplayAlert("Mensaje", "Datos almacenados.", "Aceptar");
+        await outDbContext.SaveChangesAsync();
+        await Shell.Current.DisplayAlert("Mensaje", $"Nueva orden: {newOrder.Id}", "Aceptar");
+        await navigationService.GoToAsync($"{nameof(SignaturePage)}?orderId={newOrder.Id}");
     }
 }

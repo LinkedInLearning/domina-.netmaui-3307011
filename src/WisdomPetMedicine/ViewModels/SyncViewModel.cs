@@ -32,10 +32,7 @@ public partial class SyncViewModel : ViewModelBase
     [RelayCommand]
     private async Task Sync()
     {
-        var allSales = outDbContext.Sales
-                .ToList()
-                .Select(s => new Sale(s.ClientId, s.ProductId, 
-                null, s.Price, s.Quantity, default));
+        var allSales = outDbContext.Orders.AsEnumerable();
 
         try
         {

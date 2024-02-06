@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WisdomPetMedicine.Views.SignaturePage"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Title="Firma">
+    <Grid RowDefinitions="*,Auto">
+        <toolkit:DrawingView BackgroundColor="Transparent"
+                             Lines="{Binding Lines}"
+                             IsMultiLineModeEnabled="True" />
+
+        <Grid Grid.Row="1" ColumnDefinitions="*,*" Padding="4">
+            <Button Text="Guardar" 
+                    Command="{Binding SaveCommand}" />
+            <Button Text="Omitir" 
+                    Command="{Binding SkipCommand}"
+                    Grid.Column="1" />
+        </Grid>
+    </Grid>
+    
+    
+</ContentPage>
