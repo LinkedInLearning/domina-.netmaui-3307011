@@ -13,6 +13,9 @@ public partial class DashboardPage : ContentPage
     protected override void OnNavigatedTo(NavigatedToEventArgs args)
     {
         base.OnNavigatedTo(args);
-		(BindingContext as DashboardViewModel).LoadDashboard();
+		var vm = BindingContext as DashboardViewModel;
+		vm.LoadDashboard();
+
+        VisualStateManager.GoToState(layout, vm.Clients == vm.Visits ? "Completed" : "InProgress");
     }
 }

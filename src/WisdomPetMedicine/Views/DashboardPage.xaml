@@ -23,8 +23,29 @@
         </VerticalStackLayout>
         
         <VerticalStackLayout Grid.Row="1"
+                             x:Name="layout"
                              BackgroundColor="{StaticResource Primary}"
                              Padding="10">
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup Name="ProgressStates">
+                    <VisualState Name="InProgress">
+                        <VisualState.Setters>
+                            <Setter TargetName="layout"
+                                    Property="BackgroundColor"
+                                    Value="Red" />
+                        </VisualState.Setters>
+                    </VisualState>
+
+                    <VisualState Name="Completed">
+                        <VisualState.Setters>
+                            <Setter TargetName="layout"
+                                    Property="BackgroundColor"
+                                    Value="Green" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            
             <HorizontalStackLayout>
                 <Label Text="{Binding Visits}" />
                 <Label Text="/" />
