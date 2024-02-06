@@ -5,7 +5,16 @@
              xmlns:vm="clr-namespace:WisdomPetMedicine.ViewModels"
              Title="Venta">
 
-    <Grid RowDefinitions="*,Auto,*,Auto" Padding="4">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding FinishSaleCommand}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialIcons"
+                                 Glyph="&#xf075;" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+    <Grid RowDefinitions="*,Auto,*" Padding="4">
         <Grid ColumnDefinitions="*,*">
             <CollectionView ItemsSource="{Binding Products}"
                             SelectedItem="{Binding SelectedProduct, Mode=TwoWay}"
@@ -79,9 +88,5 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-
-        <Button Grid.Row="3"
-                Text="Finalizar"
-                Command="{Binding FinishSaleCommand}" />
     </Grid>
 </ContentPage>
