@@ -3,11 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WisdomPetMedicine.Views.OrdersPage"
              xmlns:viewModels="clr-namespace:WisdomPetMedicine.ViewModels"
-             xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
              x:DataType="viewModels:OrdersViewModel"
              Title="Órdenes">
-    
-    <Grid RowDefinitions="*,*">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Crear código QR" Clicked="ToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialIcons"
+                     Glyph="&#xef6b;" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+    <Grid>
         <CollectionView ItemsSource="{Binding Orders}" 
                         SelectedItem="{Binding SelectedOrder, Mode=TwoWay}"
                         SelectionMode="Single">
@@ -23,10 +30,5 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-
-        <zxing:BarcodeGeneratorView Format="QrCode"
-                                    Value="{Binding SelectedOrder.OrderId, StringFormat='https://wisdompetmed.com?orderid={0}'}"
-                                    Grid.Row="1" 
-                                    Margin="4" />
     </Grid>
 </ContentPage>
