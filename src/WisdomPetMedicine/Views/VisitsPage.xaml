@@ -8,6 +8,32 @@
     <CollectionView 
             SelectionMode="Single"
             SelectedItem="{Binding SelectedClient, Mode=TwoWay}"
-            ItemsSource="{Binding Clients, Mode=OneWay}"
-            ItemTemplate="{StaticResource ClientDataTemplate}" />
+            ItemsSource="{Binding Clients, Mode=OneWay}">
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <SwipeView>
+                    <SwipeView.RightItems>
+                        <SwipeItems>
+                            <SwipeItem Text="Inspección"
+                            BackgroundColor="LightBlue"
+                            Command="{Binding BindingContext.CreateInspectionCommand,
+                        Source={x:RelativeSource AncestorType={x:Type ContentPage}}}"
+                            CommandParameter="{Binding}" />
+                            <SwipeItem Text="Venta"
+                            BackgroundColor="LightGoldenrodYellow"
+                            Command="{Binding BindingContext.CreateOrderCommand,
+                        Source={x:RelativeSource AncestorType={x:Type ContentPage}}}"
+                            CommandParameter="{Binding}" />
+                        </SwipeItems>
+                    </SwipeView.RightItems>
+
+                    <VerticalStackLayout Padding="10" HeightRequest="100">
+                        <Label Text="{Binding Name}" FontSize="Title" />
+                        <Label Text="{Binding Address}" FontSize="Subtitle" />
+                    </VerticalStackLayout>
+
+                </SwipeView>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
 </ContentPage>

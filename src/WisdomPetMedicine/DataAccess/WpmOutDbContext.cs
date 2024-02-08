@@ -5,6 +5,7 @@ namespace WisdomPetMedicine.DataAccess;
 public class WpmOutDbContext(IDatabasePathService databasePathService) : DbContext
 {
     public DbSet<Order> Orders { get; set; }
+    public DbSet<Inspection> Inspections { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -31,4 +32,26 @@ public class OrderItem
     public int Quantity { get; set; }
     public decimal Price { get; set; }
     public Order Order { get; set; }
+}
+
+public class Inspection
+{
+    public int Id { get; set; }
+    public int ClientId { get; set; }
+    public DateTime InspectionDate { get; set; } = DateTime.UtcNow;
+    public List<InspectionItem> Items { get; set; } = new();
+}
+
+public class InspectionItem
+{
+    public int Id { get; set; }
+    public int InspectionId { get; set; }
+    public byte[] Media { get; set; }
+    public InspectionType Type { get; set; }
+    public Inspection Inspection { get; set; }
+}
+
+public enum InspectionType
+{
+    Photo
 }
