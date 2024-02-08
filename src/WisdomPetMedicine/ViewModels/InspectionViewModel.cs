@@ -38,9 +38,13 @@ public partial class InspectionViewModel(WpmOutDbContext wpmOutDbContext, INavig
     [RelayCommand(CanExecute = nameof(CanSaveInspection))]
     private async Task SaveInspection()
     {
+        var location = await GetCurrentLocation();
+
         var newInspection = new Inspection
         {
-            ClientId = ClientId
+            ClientId = ClientId,
+            Lat = location.Latitude,
+            Lon = location.Longitude
         };
         foreach (var photo in Photos)
         {
@@ -59,6 +63,13 @@ public partial class InspectionViewModel(WpmOutDbContext wpmOutDbContext, INavig
     private bool CanSaveInspection()
     {
         return Photos.Count > 0;
+    }
+
+    private async Task<Location> GetCurrentLocation()
+    {
+        GeolocationRequest request = new GeolocationRequest(GeolocationAccuracy.Medium, TimeSpan.FromSeconds(5));
+        var location = await Geolocation.Default.GetLocationAsync(request);
+        return location;
     }
 
     public void ApplyQueryAttributes(IDictionary<string, object> query)

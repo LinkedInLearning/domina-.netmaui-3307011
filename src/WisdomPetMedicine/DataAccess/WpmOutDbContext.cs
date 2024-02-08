@@ -39,6 +39,8 @@ public class Inspection
     public int Id { get; set; }
     public int ClientId { get; set; }
     public DateTime InspectionDate { get; set; } = DateTime.UtcNow;
+    public double? Lat { get; set; }
+    public double? Lon { get; set; }
     public List<InspectionItem> Items { get; set; } = new();
 }
 
