@@ -1,5 +1,6 @@
 ﻿using WisdomPetMedicine.Extensions;
 using CommunityToolkit.Maui;
+using ZXing.Net.Maui.Controls;
 
 namespace WisdomPetMedicine;
 public static class MauiProgram
@@ -12,7 +13,8 @@ public static class MauiProgram
             fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
             fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             fonts.AddFont("MaterialIcons-Regular.ttf", "MaterialIcons");
-        }).UseMauiCommunityToolkit();
+        }).UseMauiCommunityToolkit()
+          .UseBarcodeReader();
         builder.ConfigureWisdomPetMedicine();
         return builder.Build();
     }

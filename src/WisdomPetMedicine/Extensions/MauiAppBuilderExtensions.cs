@@ -25,6 +25,7 @@ public static class MauiAppBuilderExtensions
         builder.Services.AddSingleton<SyncService>();
         builder.Services.AddSingleton<IDatabasePathService, DatabasePathService>();
         builder.Services.AddDbContext<WpmOutDbContext>();
+        builder.Services.AddDbContext<WpmDbContext>();
         //builder.Services.AddSingleton<AuthService>();
         builder.Services.AddTransient<SyncPage>();
         builder.Services.AddTransient<SyncViewModel>();
@@ -32,6 +33,8 @@ public static class MauiAppBuilderExtensions
         builder.Services.AddTransient<SignatureViewModel>();
         builder.Services.AddTransient<InspectionPage>();
         builder.Services.AddTransient<InspectionViewModel>();
+        builder.Services.AddTransient<OrdersPage>();
+        builder.Services.AddTransient<OrdersViewModel>();
 
         var dbContext = new WpmDbContext();
         dbContext.Database.EnsureCreated();
@@ -45,6 +48,7 @@ public static class MauiAppBuilderExtensions
             typeof(SignaturePage));
         Routing.RegisterRoute(nameof(InspectionPage),
             typeof(InspectionPage));
-
+        Routing.RegisterRoute(nameof(OrdersPage),
+            typeof(OrdersPage));
     }
 }

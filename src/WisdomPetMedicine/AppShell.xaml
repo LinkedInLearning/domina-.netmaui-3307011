@@ -69,6 +69,11 @@
         Route="VisitsPage" />
 
     <ShellContent
+        Title="Órdenes"
+        ContentTemplate="{DataTemplate views:OrdersPage}"
+        Route="OrdersPage" />
+
+    <ShellContent
         Title="Sincronizar"
         ContentTemplate="{DataTemplate views:SyncPage}"
         Route="SyncPage" />

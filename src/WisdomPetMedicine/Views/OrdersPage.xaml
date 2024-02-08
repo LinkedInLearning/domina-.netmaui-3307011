@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WisdomPetMedicine.Views.OrdersPage"
+             xmlns:viewModels="clr-namespace:WisdomPetMedicine.ViewModels"
+             xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
+             x:DataType="viewModels:OrdersViewModel"
+             Title="Órdenes">
+    
+    <Grid RowDefinitions="*,*">
+        <CollectionView ItemsSource="{Binding Orders}" 
+                        SelectedItem="{Binding SelectedOrder, Mode=TwoWay}"
+                        SelectionMode="Single">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="viewModels:OrderViewModel">
+                    <Grid ColumnDefinitions="4*, *" Padding="4">
+                        <VerticalStackLayout>
+                            <Label Text="{Binding OrderDate}" FontSize="Micro" />
+                            <Label Text="{Binding ClientName}" FontSize="Subtitle" />
+                        </VerticalStackLayout>
+                        <Label Text="{Binding TotalAmount, StringFormat='{0:C}'}" Grid.Column="1" VerticalTextAlignment="Center" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <zxing:BarcodeGeneratorView Format="QrCode"
+                                    Value="{Binding SelectedOrder.OrderId, StringFormat='https://wisdompetmed.com?orderid={0}'}"
+                                    Grid.Row="1" 
+                                    Margin="4" />
+    </Grid>
+</ContentPage>
