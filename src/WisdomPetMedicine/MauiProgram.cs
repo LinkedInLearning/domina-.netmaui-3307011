@@ -14,7 +14,8 @@ public static class MauiProgram
             fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             fonts.AddFont("MaterialIcons-Regular.ttf", "MaterialIcons");
         }).UseMauiCommunityToolkit()
-          .UseBarcodeReader();
+          .UseBarcodeReader()
+          .UseMauiMaps();
         builder.ConfigureWisdomPetMedicine();
         return builder.Build();
     }

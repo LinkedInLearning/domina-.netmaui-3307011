@@ -36,9 +36,9 @@ public class WpmDbContext : DbContext
             );
 
         modelBuilder.Entity<Client>().HasData(
-            new Client(1, "Wisdom Pet Medicine sucursal norte", Guid.NewGuid().ToString()),
-            new Client(2, "Wisdom Pet Medicine sucursal centro", Guid.NewGuid().ToString()),
-            new Client(3, "Wisdom Pet Medicine sucursal sur", Guid.NewGuid().ToString())
+            new Client(1, "Wisdom Pet Medicine sucursal norte", Guid.NewGuid().ToString(), 40.453071, -3.688059),
+            new Client(2, "Wisdom Pet Medicine sucursal centro", Guid.NewGuid().ToString(), 40.416906, -3.7060583),
+            new Client(3, "Wisdom Pet Medicine sucursal sur", Guid.NewGuid().ToString(), 40.317185, -3.726260)
             );
     }
 }
@@ -48,4 +48,4 @@ public record Product(int Id, string Name, string Description, decimal Price, in
 {
     public Category Category { get; set; }
 }
-public record Client(int Id, string Name, string Address);
+public record Client(int Id, string Name, string Address, double? Lat, double? Lon);

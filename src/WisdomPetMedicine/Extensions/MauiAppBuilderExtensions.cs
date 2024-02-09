@@ -35,6 +35,8 @@ public static class MauiAppBuilderExtensions
         builder.Services.AddTransient<InspectionViewModel>();
         builder.Services.AddTransient<OrdersPage>();
         builder.Services.AddTransient<OrdersViewModel>();
+        builder.Services.AddTransient<MapPage>();
+        builder.Services.AddTransient<MapViewModel>();
 
         var dbContext = new WpmDbContext();
         dbContext.Database.EnsureCreated();

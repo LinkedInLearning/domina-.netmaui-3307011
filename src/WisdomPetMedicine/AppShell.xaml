@@ -63,10 +63,21 @@
 
     </FlyoutItem>
 
-    <ShellContent
-        Title="Visitas"
-        ContentTemplate="{DataTemplate views:VisitsPage}"
-        Route="VisitsPage" />
+    <FlyoutItem Title="Visitas">
+        <Tab Title="Lista">
+            <ShellContent
+                Title="Visitas"
+                ContentTemplate="{DataTemplate views:VisitsPage}"
+                Route="VisitsPage" />
+        </Tab>
+
+        <Tab Title="Mapa">
+            <ShellContent
+                Title="Visitas"
+                ContentTemplate="{DataTemplate views:MapPage}"
+                Route="VisitsPage" />
+        </Tab>
+    </FlyoutItem>
 
     <ShellContent
         Title="Órdenes"
