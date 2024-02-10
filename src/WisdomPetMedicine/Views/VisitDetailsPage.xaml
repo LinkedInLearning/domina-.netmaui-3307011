@@ -6,7 +6,8 @@
              Title="Venta">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Command="{Binding FinishSaleCommand}">
+        <ToolbarItem Command="{Binding FinishSaleCommand}"
+                     Text="Guardar">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="MaterialIcons"
                                  Glyph="&#xf075;" />

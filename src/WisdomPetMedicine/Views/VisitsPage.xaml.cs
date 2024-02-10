@@ -13,5 +13,9 @@ public partial class VisitsPage : ContentPage
     {
         base.OnNavigatedTo(args);
         (BindingContext as VisitsViewModel).SelectedClient = null;
+        if (DeviceInfo.Platform == DevicePlatform.Android)
+        {
+            ToolbarItems.Clear();
+        }
     }
 }

@@ -5,6 +5,24 @@
              xmlns:vm="clr-namespace:WisdomPetMedicine.ViewModels"
              Title="{Binding Clients.Count, StringFormat='Clientes ({0} en total)'}">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Inspección"
+                     Command="{Binding CreateInspectionCommand}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialIcons"
+                                 Glyph="&#xe439;" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        
+        <ToolbarItem Text="Venta"
+                     Command="{Binding CreateOrderCommand}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialIcons"
+                 Glyph="&#xe0ee;" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+
     <CollectionView 
             SelectionMode="Single"
             SelectedItem="{Binding SelectedClient, Mode=TwoWay}"
