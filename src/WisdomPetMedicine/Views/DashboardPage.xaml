@@ -17,7 +17,8 @@
           Padding="20">
         <VerticalStackLayout Grid.ColumnSpan="2"
                              BackgroundColor="{StaticResource Quaternary}"
-                             Padding="10">
+                             Padding="10"
+                             ToolTipProperties.Text="Total de todas las ventas">
             <Label Text="{Binding TotalAmount, StringFormat='{0:C}'}" />
             <Label Text="Ventas totales" FontSize="Subtitle" />
         </VerticalStackLayout>
@@ -25,7 +26,8 @@
         <VerticalStackLayout Grid.Row="1"
                              x:Name="layout"
                              BackgroundColor="{StaticResource Primary}"
-                             Padding="10">
+                             Padding="10"
+                             ToolTipProperties.Text="Total de clientes visitados">
             <VisualStateManager.VisualStateGroups>
                 <VisualStateGroup Name="ProgressStates">
                     <VisualState Name="InProgress">
@@ -56,7 +58,8 @@
 
         <VerticalStackLayout Grid.Row="1" Grid.Column="1"
                              BackgroundColor="{StaticResource Secondary}"
-                             Padding="10">
+                             Padding="10"
+                             ToolTipProperties.Text="Total de productos vendidos">
             <Label Text="{Binding TotalProducts}" />
             <Label Text="Productos totales vendidos"
                    FontSize="Subtitle" />
