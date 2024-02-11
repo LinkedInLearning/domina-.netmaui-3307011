@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Maui" Version="7.0.1" />
+    
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
     <PackageReference Include="Microsoft.Maui.Controls.Maps" Version="8.0.6" />
 	<PackageReference Include="ZXing.Net.Maui.Controls" Version="0.4.0" />
@@ -52,6 +53,8 @@
     <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.1" />
+	<PackageReference Include="CommunityToolkit.Maui.Maps" Version="2.0.0" />
+	<PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="8.0.0" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Platforms\Android\DatabasePathService.cs">
