@@ -48,6 +48,14 @@
                                HeightRequest="100"
                                Margin="4" 
                                HorizontalOptions="StartAndExpand" />
+                        <FlyoutBase.ContextFlyout>
+                            <MenuFlyout>
+                                <MenuFlyoutItem Text="Borrar"
+                                                Command="{Binding BindingContext.DeletePhotoCommand,
+                                                    Source={x:RelativeSource AncestorType={x:Type ContentPage}}}"
+                                                CommandParameter="{Binding}" />
+                            </MenuFlyout>
+                        </FlyoutBase.ContextFlyout>
                     </Grid>
                 </SwipeView>
             </DataTemplate>
